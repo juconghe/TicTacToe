@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 class GameBoard implements View{
     private String gameName;
@@ -85,10 +84,14 @@ class GameBoard implements View{
     }
 
    public void gameOver(int player) {
-        playerturn.setText("Player "+player+" won!");
-        for (JButton[] block : blocks) {
-            for (int column = 0; column < blocks[0].length; column++) {
-                block[column].setEnabled(false);
+        if (player == 3) {
+            playerturn.setText("Game ends in a draw");
+        } else {
+            playerturn.setText("Player "+player+" won!");
+            for (JButton[] block : blocks) {
+                for (int column = 0; column < blocks[0].length; column++) {
+                    block[column].setEnabled(false);
+                }
             }
         }
     }
