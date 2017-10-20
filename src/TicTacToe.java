@@ -16,10 +16,30 @@ public class TicTacToe {
         TicTacToe game = new TicTacToe();
     }
 
+    private GameBoard gb;
+    private ActionListener[][] btnListeners = new GameBtnListener[3][3];
+    private GameModel gameModel;
     /**
      * The default constructor, which initializes the GUI.
      */
     public TicTacToe() {
-      GameBoard gb = new GameBoard("Tic Tac Toe", 3, 3);
+        gameModel = new GameModel();
+        gb = new GameBoard("Tic Tac Toe");
+        gameModel.registerView(gb);
+        initListeners();
+    }
+
+    private void initListeners() {
+        for(int row = 0; row<btnListeners.length ;row++) {
+            for(int column = 0; column<btnListeners[0].length;column++) {
+                GameBtnListener gL = new GameBtnListener();
+                gL.registerModel(gameModel);
+                btnListeners[row][column] = gL;
+            }
+        }
+        gb.initBtnsAndRegisterListener(btnListeners);
+        ResetBtnListener rL = new ResetBtnListener();
+        rL.registerModel(gameModel);
+        gb.initRestBtnAndRegisterListener(rL);
     }
 }
