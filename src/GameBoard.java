@@ -76,6 +76,7 @@ class GameBoard {
                 block[column].setEnabled(true);
             }
         }
+        playerturn.setText("Player 1 to play 'X'");
     }
 
     void gameOver(int player) {

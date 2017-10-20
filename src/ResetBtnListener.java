@@ -5,7 +5,7 @@ public class ResetBtnListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Rest Btn Clicked");
+//        System.out.println("Rest Btn Clicked");
         gameModel.reset();
     }
 

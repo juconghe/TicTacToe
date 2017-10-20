@@ -5,7 +5,7 @@ public class GameBtnListener implements ActionListener {
     private GameModel gameModel;
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Btn "+btnRowIdx+" "+btnColIdx +" is clicked" );
+//        System.out.println("Btn "+btnRowIdx+" "+btnColIdx +" is clicked" );
         gameModel.update(btnRowIdx, btnColIdx);
 }
 
