@@ -1,13 +1,13 @@
-class GameModel {
+class GameModel implements Model{
     private int gameBoard[][];
-    private GameBoard gameBoardView;
+    private View gameBoardView;
     private int player;
     GameModel() {
         player = 1;
         gameBoard = new int[3][3];
     }
 
-    void update(int row, int col) {
+   public void update(int row, int col) {
         gameBoard[row][col] = player;
         gameBoardView.updateBtn(row,col,player);
         if(isGame()){
@@ -20,11 +20,11 @@ class GameModel {
         }
     }
 
-    void registerView(GameBoard gb) {
+   public void registerView(View gb) {
         gameBoardView = gb;
     }
 
-    void reset() {
+   public void reset() {
         gameBoard = new int[3][3];
         gameBoardView.resetGame();
         player = 1;

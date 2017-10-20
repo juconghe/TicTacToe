@@ -1,7 +1,7 @@
 import java.awt.event.*;
 
-public class ResetBtnListener implements ActionListener {
-    private GameModel gameModel;
+public class ResetBtnListener implements Controller {
+    private Model gameModel;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -9,7 +9,7 @@ public class ResetBtnListener implements ActionListener {
         gameModel.reset();
     }
 
-    public void registerModel(GameModel model) {
+    public void registerModel(Model model) {
         gameModel = model;
     }
 }

@@ -1,8 +1,8 @@
 import java.awt.event.*;
 
-public class GameBtnListener implements ActionListener {
+public class GameBtnListener implements Controller {
     private int btnRowIdx, btnColIdx;
-    private GameModel gameModel;
+    private Model gameModel;
     @Override
     public void actionPerformed(ActionEvent e) {
 //        System.out.println("Btn "+btnRowIdx+" "+btnColIdx +" is clicked" );
@@ -14,7 +14,7 @@ public class GameBtnListener implements ActionListener {
         btnColIdx = col;
     }
 
-    public void registerModel(GameModel model) {
+    public void registerModel(Model model) {
         gameModel = model;
     }
 }

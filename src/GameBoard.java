@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-class GameBoard {
+class GameBoard implements View{
     private String gameName;
     private JButton[][] blocks;
     private JPanel game;
@@ -11,14 +11,14 @@ class GameBoard {
     GameBoard(String gameName) {
 
         this.gameName = gameName;
-        blocks = new GameBtn[3][3];
+        blocks = new JButton[3][3];
         initBoard();
     }
 
     private void initBoard() {
         JFrame gui = new JFrame(gameName);
         playerturn = new JTextArea();
-        reset = new GameBtn("Reset");
+        reset = new JButton("Reset");
 
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setSize(new Dimension(500, 350));
@@ -43,24 +43,29 @@ class GameBoard {
 
     }
 
-    void initBtnsAndRegisterListener(ActionListener[][] listener) {
+   public void initBtnsAndRegisterListener(Controller[][] controllers) {
         // Initialize a JButton for each cell of the 3x3 game board.
         for(int row = 0; row<blocks.length ;row++) {
             for (int column = 0; column < blocks[0].length; column++) {
-                GameBtn btn = new GameBtn();
+                JButton btn = new JButton();
                 blocks[row][column] = btn;
-                btn.setBtnIndex(row, column);
-                btn.registerActionListener(listener[row][column]);
+                btn.setPreferredSize(new Dimension(75,75));
+                controllers[row][column].setIndex(row,column);
+                registerBtnListener(btn,controllers[row][column]);
                 game.add(btn);
             }
         }
     }
 
-    void initRestBtnAndRegisterListener(ActionListener listener) {
-        reset.addActionListener(listener);
+   public void initRestBtnAndRegisterListener(Controller controller) {
+        registerBtnListener(reset,controller);
     }
 
-    void updateBtn(int row, int col, int player) {
+    private void registerBtnListener(JButton btn, Controller controller) {
+        btn.addActionListener(controller);
+    }
+
+    public void updateBtn(int row, int col, int player) {
         if (player == 1) {
             blocks[row][col].setText("X");
         } else {
@@ -69,7 +74,7 @@ class GameBoard {
         blocks[row][col].setEnabled(false);
     }
 
-    void resetGame() {
+   public void resetGame() {
         for (JButton[] block : blocks) {
             for (int column = 0; column < blocks[0].length; column++) {
                 block[column].setText("");
@@ -79,7 +84,7 @@ class GameBoard {
         playerturn.setText("Player 1 to play 'X'");
     }
 
-    void gameOver(int player) {
+   public void gameOver(int player) {
         playerturn.setText("Player "+player+" won!");
         for (JButton[] block : blocks) {
             for (int column = 0; column < blocks[0].length; column++) {
