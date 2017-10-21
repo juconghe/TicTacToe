@@ -9,4 +9,7 @@ public interface View {
     void initRestBtnAndRegisterListener(Controller controller);
 
     void initBtnsAndRegisterListener(Controller[][] controllers);
+
+    // testing method for view
+    int num_listeners();
 }

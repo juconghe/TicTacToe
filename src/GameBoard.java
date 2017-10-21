@@ -7,6 +7,7 @@ class GameBoard implements View{
     private JPanel game;
     private JButton reset;
     private JTextArea playerturn;
+    private int num_listener;
     GameBoard(String gameName) {
 
         this.gameName = gameName;
@@ -18,6 +19,7 @@ class GameBoard implements View{
         JFrame gui = new JFrame(gameName);
         playerturn = new JTextArea();
         reset = new JButton("Reset");
+        num_listener = 0;
 
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setSize(new Dimension(500, 350));
@@ -61,6 +63,7 @@ class GameBoard implements View{
     }
 
     private void registerBtnListener(JButton btn, Controller controller) {
+        num_listener += 1;
         btn.addActionListener(controller);
     }
 
@@ -94,5 +97,10 @@ class GameBoard implements View{
                 }
             }
         }
+    }
+
+    // testing method only
+    public int num_listeners() {
+        return num_listener;
     }
 }

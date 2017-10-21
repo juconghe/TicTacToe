@@ -17,4 +17,9 @@ public class GameBtnListener implements Controller {
     public void registerModel(Model model) {
         gameModel = model;
     }
+
+    @Override
+    public Model getModel() {
+        return gameModel;
+    }
 }

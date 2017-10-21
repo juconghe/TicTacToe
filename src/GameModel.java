@@ -2,7 +2,7 @@ class GameModel implements Model{
     private int gameBoard[][];
     private View gameBoardView;
     private int player;
-    private int moves = 8;
+    private int moveLeft = 8;
     GameModel() {
         player = 1;
         gameBoard = new int[3][3];
@@ -10,11 +10,11 @@ class GameModel implements Model{
 
    public void update(int row, int col) {
         gameBoard[row][col] = player;
-        moves -= 1;
+        moveLeft -= 1;
         gameBoardView.updateBtn(row,col,player);
         if(isGame()){
             gameBoardView.gameOver(player);
-        } else if (moves== 0){
+        } else if (moveLeft == 0){
             gameBoardView.gameOver(3);
         }
         if (player == 1) {
@@ -24,7 +24,12 @@ class GameModel implements Model{
         }
     }
 
-   public void registerView(View gb) {
+    @Override
+    public int getMoveLeft() {
+        return moveLeft;
+    }
+
+    public void registerView(View gb) {
         gameBoardView = gb;
     }
 
@@ -32,6 +37,7 @@ class GameModel implements Model{
         gameBoard = new int[3][3];
         gameBoardView.resetGame();
         player = 1;
+        moveLeft = 8;
     }
 
     private boolean isGame() {
